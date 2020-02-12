@@ -21,7 +21,7 @@ public class University {
     /**
      * Number of students which will be studying in parallel
      */
-    private final static int NUMBER_OF_STUDENTS = 5;
+    private final static int NUMBER_OF_STUDENTS = 1;
 
     public static void main(String[] args) {
         TeachingAssistant ta = new TeachingAssistant(NUMBER_OF_CHAIRS);
@@ -45,6 +45,7 @@ public class University {
 
             // Send the TA home
             ta.goHome();
+            System.out.println("TA: Going home");
             ta.join();
 
         } catch (InterruptedException ex) {

@@ -28,14 +28,14 @@ public class Student extends Thread {
     /**
      * The students get tired with this probability after each study period
      */
-    private static final float TIREDNESS_PROBABILITY = 0.1f;
+    private static final float TIREDNESS_PROBABILITY = 0.9f;
 
     /**
      * Minimum time it takes to study, in milliseconds
      */
-    private final static int MIN_STUDY_TIME = 5000;
+    private final static int MIN_STUDY_TIME = 1000;
 
-    void setAssistant(TeachingAssistant ta) {
+    synchronized void setAssistant(TeachingAssistant ta) {
         this.ta = ta;
     }
 
@@ -134,7 +134,7 @@ public class Student extends Thread {
     synchronized void notifyHelpDone() {
         // TODO - Notify the student letting him/her 
         // know that the helping is done and it's time to wake up :)
-        notify();
+        notifyAll();
     }
     
     /**
@@ -144,6 +144,6 @@ public class Student extends Thread {
     synchronized void notifyWaitingDone() {
         // TODO - Notify the student that the waiting is finished and 
         // he/she can come in.
-        notify();
+        notifyAll();
     }
 }

@@ -63,13 +63,14 @@ public class TeachingAssistant extends Thread {
      * @param s
      * @return true if student accepted, false otherwise
      */
-    public boolean getIntoOffice(Student s) {
+    public synchronized boolean getIntoOffice(Student s) {
         if (isBusy()) return false;
         
         // Not busy, accept the student
         this.currentStudent = s;
         
         // TODO - notify the TA to wake up
+        notify();
         
         return true;
     }
@@ -162,10 +163,11 @@ public class TeachingAssistant extends Thread {
      * have any student to help to. A blocking method
      * @throws InterruptedException 
      */
-    private void sleepUntilFirstStudent() throws InterruptedException {
+    private synchronized void sleepUntilFirstStudent() throws InterruptedException {
         System.out.println("TA: TA taking a nap. ZzZz...");
         
         // TODO - Wait for "Wake up" signal from a student
+        wait();
     }
 
     /**

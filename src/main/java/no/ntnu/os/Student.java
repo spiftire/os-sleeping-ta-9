@@ -114,32 +114,36 @@ public class Student extends Thread {
     /**
      * This method should block while the student is waiting in the queue.
      */
-    private void waitForTAToBecomeAvailable() {
+    private synchronized void waitForTAToBecomeAvailable() throws InterruptedException {
         // TODO - wait for the TA to become available
+        wait();
     }
 
     /**
      * This method should block while the consultation is in progress.
      */
-    private void waitForConsultationToBeDone() {
+    private synchronized void waitForConsultationToBeDone() throws InterruptedException {
         // TODO - wait for the consultation to be done
+        wait();
     }
 
     /**
      * A method called from the TA thread to let this student know that helping
      * session is finished.
      */
-    void notifyHelpDone() {
+    synchronized void notifyHelpDone() {
         // TODO - Notify the student letting him/her 
         // know that the helping is done and it's time to wake up :)
+        notify();
     }
     
     /**
      * A method called from the TA thread to let this student know that
      * the waiting is finished and he/she can come in.
      */
-    void notifyWaitingDone() {
+    synchronized void notifyWaitingDone() {
         // TODO - Notify the student that the waiting is finished and 
         // he/she can come in.
+        notify();
     }
 }
